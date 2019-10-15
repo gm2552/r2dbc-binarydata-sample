@@ -27,25 +27,28 @@ public class ProviderRepositoryTest
 	public void setUp() 
 	{
 
-
+		System.out.println("Createing the provider table.");
+		
 		List<String> statements = Arrays.asList(//
 				"DROP TABLE IF EXISTS provider;",
 				"CREATE TABLE provider ( id SERIAL PRIMARY KEY, firstname VARCHAR(100) NOT NULL, lastname VARCHAR(100) NOT NULL, cert BLOB NOT NULL);");
-
-		statements.forEach(it -> database.execute() //
-				.sql(it) //
+		
+		
+		statements.forEach(it -> database.execute(it) //
 				.fetch() //
 				.rowsUpdated() //
 				.as(StepVerifier::create) //
 				.expectNextCount(1) //
 				.verifyComplete());
+	
+		System.out.println("Createing the provider table.");
 	}	
 	
 	@Test
 	public void testAddRetrieveProvider()
-	{
+	{		
 		final Provider prov1 = new Provider(null, "First1", "Last1", new byte[] {1,2,3,4,5});
-		final Provider prov2 = new Provider(null, "First2", "Last2", new byte[] {6,7,8,9,0});
+		final Provider prov2 = new Provider(null, "First2", "Last2", new byte[] {1,2,3,4,5});
 		
 		/*
 		 * Add and verify 
@@ -60,5 +63,6 @@ public class ProviderRepositoryTest
 		.assertNext(prov1::equals) //
 		.assertNext(prov2::equals) //
 		.verifyComplete();
+		
 	}
 }
