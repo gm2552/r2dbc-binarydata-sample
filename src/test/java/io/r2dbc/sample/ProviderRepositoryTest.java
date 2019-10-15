@@ -27,7 +27,7 @@ public class ProviderRepositoryTest
 	public void setUp() 
 	{
 
-		System.out.println("Createing the provider table.");
+		System.out.println("Creating the provider table.");
 		
 		List<String> statements = Arrays.asList(//
 				"DROP TABLE IF EXISTS provider;",
@@ -41,7 +41,7 @@ public class ProviderRepositoryTest
 				.expectNextCount(1) //
 				.verifyComplete());
 	
-		System.out.println("Createing the provider table.");
+		System.out.println("Created the provider table.");
 	}	
 	
 	@Test
