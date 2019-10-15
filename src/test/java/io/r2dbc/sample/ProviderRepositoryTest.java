@@ -53,16 +53,22 @@ public class ProviderRepositoryTest
 		/*
 		 * Add and verify 
 		 */
+
+		System.out.println("Saving new providers");
 		this.provRep.saveAll(Arrays.asList(prov1, prov2))//
 		.as(StepVerifier::create) //
 		.expectNextCount(2) //
 		.verifyComplete();
 		
+		System.out.println("Reading all providers");
 		provRep.findAll() //
 		.as(StepVerifier::create) //
 		.assertNext(prov1::equals) //
 		.assertNext(prov2::equals) //
 		.verifyComplete();
+
+		
+
 		
 	}
 }
